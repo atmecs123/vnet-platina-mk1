@@ -249,6 +249,16 @@ func (mk1 *Mk1) Hset(args args.Hset, reply *reply.Hset) error {
 	return err
 }
 
+func (mk1 *Mk1) Createpub(args string, reply *struct{}) (err error) {
+	if mk1.pub != nil{
+		mk1.pub.Close()
+	}
+	if mk1.pub, err = publisher.New(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (mk1 *Mk1) init() {
 	const (
 		defaultPollInterval             = 5
